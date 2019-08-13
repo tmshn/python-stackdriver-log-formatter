@@ -6,17 +6,6 @@ from typing import Optional
 
 from stackdriver_formatter.serializer import DefaultFunc, dumps
 
-# TODO: document
-# TODO: formatter (black?)
-
-# TODO: integartion with trace and easiser handling of httpRequest and logging.googleapis.com/operation
-# https://cloud.google.com/trace/docs/setup/python
-# - @insert_id_key:       logging.googleapis.com/insertId
-# - @span_id_key:         logging.googleapis.com/spanId
-# - @trace_key:           logging.googleapis.com/trace
-# - @trace_sampled_key:   logging.googleapis.com/trace_sampled
-# - @labels_key           logging.googleapis.com/labels
-
 class StackdriverLogFormatter(logging.Formatter):
     """Log formatter suitable for Stackdriver Logging.
 
