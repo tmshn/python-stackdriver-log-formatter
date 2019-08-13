@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import logging
-from typing import List, Tuple
+from typing import Generator, List, Tuple
 
 import freezegun
 import pytest
@@ -12,17 +12,16 @@ import stackdriver_formatter
 class OnmemoryHandler(logging.Handler):
     def __init__(self, level: int=logging.NOTSET):
         super().__init__(level)
-        self.data: List[str] = []
+        self.data = []  # type: List[str]
 
-    def emit(self, record: logging.LogRecord):
+    def emit(self, record: logging.LogRecord) -> None:
         msg = self.format(record)
         self.data.append(msg)
-
 
 LoggerAndData = Tuple[logging.Logger, List[str]]
 
 @pytest.fixture
-def logger_and_data() -> LoggerAndData:
+def logger_and_data() -> Generator[LoggerAndData, None, None]:
     hdr = OnmemoryHandler()
     hdr.setFormatter(stackdriver_formatter.StackdriverLogFormatter())
 
@@ -33,16 +32,16 @@ def logger_and_data() -> LoggerAndData:
         lgr.removeHandler(h)
     lgr.addHandler(hdr)
 
-    return lgr, hdr.data
+    yield lgr, hdr.data
 
 
 @pytest.fixture(autouse=True)
-def freezed_time():
+def freeze_time() -> Generator[None, None, None]:
     with freezegun.freeze_time(datetime(2020, 12, 31, 18, 55, 56, 123456)):
         yield
 
 
-def test_info(logger_and_data: LoggerAndData):
+def test_info(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
     logger.info('hello world')
     assert len(data) == 1
@@ -68,7 +67,7 @@ def test_info(logger_and_data: LoggerAndData):
     assert 'stackInfo' not in payload
 
 
-def test_info_with_custom_data(logger_and_data: LoggerAndData):
+def test_info_with_custom_data(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
     logger.info('I have a data: %(value)d',
                 {'value': 99, 'module': 'You cannot override!', 'stackInfo': 'Cannot override too'})
@@ -97,7 +96,7 @@ def test_info_with_custom_data(logger_and_data: LoggerAndData):
     assert payload['value'] == 99
 
 
-def test_exception(logger_and_data: LoggerAndData):
+def test_exception(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
     try:
         raise RuntimeError('this is exception for the test')
@@ -126,7 +125,7 @@ def test_exception(logger_and_data: LoggerAndData):
     assert 'stackInfo' not in payload
 
 
-def test_custom_exception(logger_and_data: LoggerAndData):
+def test_custom_exception(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
     e = ValueError('this is custom exception for the test')
     logger.critical('I have a custom exception', exc_info=e)
@@ -153,7 +152,7 @@ def test_custom_exception(logger_and_data: LoggerAndData):
     assert 'stackInfo' not in payload
 
 
-def test_stackinfo(logger_and_data: LoggerAndData):
+def test_stackinfo(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
     logger.debug('show stack info', stack_info=True)
     assert len(data) == 1

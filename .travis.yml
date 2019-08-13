@@ -1,7 +1,8 @@
 language: python
 
 stages:
-  - test
+  - name: test
+    if: type = pull_request OR branch = master
   # TODO: later
   # - name: publish
   #   if: branch = master
@@ -15,7 +16,7 @@ jobs:
       install:
         - poetry install
       script:
-        - mypy stackdriver_formatter
+        - mypy
         - pytest -v
       python: 3.5
     - <<: *test
