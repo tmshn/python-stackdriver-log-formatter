@@ -1,6 +1,6 @@
-# python-stackdriver-formatter
+# python-stackdriver-log-formatter
 
-[![Build Status](https://travis-ci.com/tmshn/python-stackdriver-formatter.svg?branch=master)](https://travis-ci.com/tmshn/python-stackdriver-formatter)
+[![Build Status](https://travis-ci.com/tmshn/python-stackdriver-log-formatter.svg?branch=master)](https://travis-ci.com/tmshn/python-stackdriver-log-formatter)
 
 Python log formatter for Google Stackdriver Logging.
 
@@ -9,7 +9,7 @@ Python log formatter for Google Stackdriver Logging.
 ```python
 >>> # setup
 >>> import logging, sys
->>> from stackdriver_formatter import StackdriverLogFormatter
+>>> from stackdriver_log_formatter import StackdriverLogFormatter
 >>> logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 >>> logging.root.handlers[0].setFormatter(StackdriverLogFormatter())
 >>> # logging

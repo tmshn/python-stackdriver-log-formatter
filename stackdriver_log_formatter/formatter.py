@@ -4,7 +4,7 @@ import logging
 
 from typing import Optional
 
-from stackdriver_formatter.serializer import DefaultFunc, dumps
+from stackdriver_log_formatter.serializer import DefaultFunc, dumps
 
 class StackdriverLogFormatter(logging.Formatter):
     """Log formatter suitable for Stackdriver Logging.
