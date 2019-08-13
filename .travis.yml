@@ -1,0 +1,26 @@
+language: python
+
+stages:
+  - name: test
+    if: type = pull_request OR branch = master
+  # TODO: later
+  # - name: publish
+  #   if: branch = master
+
+jobs:
+  include:
+    - &test
+      stage: test
+      before_install:
+        - pip install poetry
+      install:
+        - poetry install
+      script:
+        - mypy
+        - pytest -v
+      python: 3.5
+    - <<: *test
+      python: 3.6
+    - <<: *test
+      python: 3.7
+      dist: bionic
