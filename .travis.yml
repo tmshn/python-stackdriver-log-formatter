@@ -1,0 +1,13 @@
+dist: bionic
+language: python
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+before_install:
+  - pip install poetry
+install:
+  - poetry install
+script:
+  - pytest -v
+  - mypy stackdriver_formatter
