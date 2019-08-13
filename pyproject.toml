@@ -2,7 +2,7 @@
 name = "stackdriver-log-formatter"
 version = "0.1.0"
 description = ""
-authors = ["tmshn <tmshn@r.recruit.co.jp>"]
+authors = ["Shinichi TAMURA <shnch.tmr@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.5"
