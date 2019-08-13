@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "stackdriver-formatter"
+version = "0.1.0"
+description = ""
+authors = ["tmshn <tmshn@r.recruit.co.jp>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+mypy = "^0.720.0"
+freezegun = "^0.3.12"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
