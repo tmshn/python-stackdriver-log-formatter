@@ -6,7 +6,7 @@ from typing import Generator, List, Tuple
 import freezegun
 import pytest
 
-import stackdriver_formatter
+import stackdriver_log_formatter
 
 
 class OnmemoryHandler(logging.Handler):
@@ -23,9 +23,9 @@ LoggerAndData = Tuple[logging.Logger, List[str]]
 @pytest.fixture
 def logger_and_data() -> Generator[LoggerAndData, None, None]:
     hdr = OnmemoryHandler()
-    hdr.setFormatter(stackdriver_formatter.StackdriverLogFormatter())
+    hdr.setFormatter(stackdriver_log_formatter.StackdriverLogFormatter())
 
-    lgr = logging.getLogger('test_logger_for_stackdriver_formatter')
+    lgr = logging.getLogger('test_logger_for_stackdriver_log_formatter')
     lgr.setLevel(logging.DEBUG)
     lgr.propagate = False
     for h in lgr.handlers:
@@ -53,8 +53,8 @@ def test_info(logger_and_data: LoggerAndData) -> None:
     assert payload['severity'] == 'INFO'
     assert payload['time'] == '2020-12-31T18:55:56.123456Z'
     assert payload['message'] == 'hello world'
-    assert payload['logger'] == 'test_logger_for_stackdriver_formatter'
-    assert payload['module'] == 'test_stackdriver_formatter'
+    assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
+    assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
     assert payload['logging.googleapis.com/sourceLocation']['line'] == 46
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_info'
@@ -80,8 +80,8 @@ def test_info_with_custom_data(logger_and_data: LoggerAndData) -> None:
     assert payload['severity'] == 'INFO'
     assert payload['time'] == '2020-12-31T18:55:56.123456Z'
     assert payload['message'] == 'I have a data: 99'
-    assert payload['logger'] == 'test_logger_for_stackdriver_formatter'
-    assert payload['module'] == 'test_stackdriver_formatter'  # This is not overriden
+    assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
+    assert payload['module'] == 'test_stackdriver_log_formatter'  # This is not overriden
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
     assert payload['logging.googleapis.com/sourceLocation']['line'] == 73
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_info_with_custom_data'
@@ -111,8 +111,8 @@ def test_exception(logger_and_data: LoggerAndData) -> None:
     assert payload['severity'] == 'ERROR'
     assert payload['time'] == '2020-12-31T18:55:56.123456Z'
     assert payload['message'] == 'An error occured!'
-    assert payload['logger'] == 'test_logger_for_stackdriver_formatter'
-    assert payload['module'] == 'test_stackdriver_formatter'
+    assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
+    assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
     assert payload['logging.googleapis.com/sourceLocation']['line'] == 104
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_exception'
@@ -138,8 +138,8 @@ def test_custom_exception(logger_and_data: LoggerAndData) -> None:
     assert payload['severity'] == 'CRITICAL'
     assert payload['time'] == '2020-12-31T18:55:56.123456Z'
     assert payload['message'] == 'I have a custom exception'
-    assert payload['logger'] == 'test_logger_for_stackdriver_formatter'
-    assert payload['module'] == 'test_stackdriver_formatter'
+    assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
+    assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
     assert payload['logging.googleapis.com/sourceLocation']['line'] == 131
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_custom_exception'
@@ -164,8 +164,8 @@ def test_stackinfo(logger_and_data: LoggerAndData) -> None:
     assert payload['severity'] == 'DEBUG'
     assert payload['time'] == '2020-12-31T18:55:56.123456Z'
     assert payload['message'] == 'show stack info'
-    assert payload['logger'] == 'test_logger_for_stackdriver_formatter'
-    assert payload['module'] == 'test_stackdriver_formatter'
+    assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
+    assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
     assert payload['logging.googleapis.com/sourceLocation']['line'] == 157
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_stackinfo'

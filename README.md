@@ -9,7 +9,7 @@ Python log formatter for Google Stackdriver Logging.
 ```python
 >>> # setup
 >>> import logging, sys
->>> from stackdriver_formatter import StackdriverLogFormatter
+>>> from stackdriver_log_formatter import StackdriverLogFormatter
 >>> logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 >>> logging.root.handlers[0].setFormatter(StackdriverLogFormatter())
 >>> # logging
