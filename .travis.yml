@@ -1,13 +1,25 @@
-dist: bionic
 language: python
-python:
-  - 3.5
-  - 3.6
-  - 3.7
-before_install:
-  - pip install poetry
-install:
-  - poetry install
-script:
-  - pytest -v
-  - mypy stackdriver_formatter
+
+stages:
+  - test
+  # TODO: later
+  # - name: publish
+  #   if: branch = master
+
+jobs:
+  include:
+    - &test
+      stage: test
+      before_install:
+        - pip install poetry
+      install:
+        - poetry install
+      script:
+        - mypy stackdriver_formatter
+        - pytest -v
+      python: 3.5
+    - <<: *test
+      python: 3.6
+    - <<: *test
+      python: 3.7
+      dist: bionic
