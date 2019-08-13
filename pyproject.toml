@@ -5,7 +5,7 @@ description = ""
 authors = ["tmshn <tmshn@r.recruit.co.jp>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
