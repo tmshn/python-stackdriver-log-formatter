@@ -2,7 +2,7 @@
 name = "stackdriver-log-formatter"
 version = "0.1.0"
 description = "Python log formatter for Google Stackdriver Logging"
-authors = ["Shinichi TAMURA <shnch.tmr@gmail.com>"]
+authors = ["Shinichi TAMURA <hello@tmshn.dev>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/tmshn/python-stackdriver-log-formatter"
