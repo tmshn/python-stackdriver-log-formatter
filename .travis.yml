@@ -3,9 +3,8 @@ language: python
 stages:
   - name: test
     if: type = pull_request OR branch = master
-  # TODO: later
-  # - name: publish
-  #   if: branch = master
+  - name: publish
+    if: branch = master AND tag IS present
 
 jobs:
   include:
@@ -24,3 +23,9 @@ jobs:
     - <<: *test
       python: 3.7
       dist: bionic
+    - stage: publish
+      before_deploy:
+        - pip install poetry
+      deploy:
+        provider: script
+        script: poetry publish --build -u __token__ -p $PYPI_TOKEN

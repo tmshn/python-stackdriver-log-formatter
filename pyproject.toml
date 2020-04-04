@@ -1,8 +1,25 @@
 [tool.poetry]
 name = "stackdriver-log-formatter"
 version = "0.1.0"
-description = ""
-authors = ["Shinichi TAMURA <shnch.tmr@gmail.com>"]
+description = "Python log formatter for Google Stackdriver Logging"
+authors = ["Shinichi TAMURA <hello@tmshn.dev>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/tmshn/python-stackdriver-log-formatter"
+repository = "https://github.com/tmshn/python-stackdriver-log-formatter"
+keywords = [
+    "logging",
+    "GCP",
+    "Google Cloud",
+    "Stackdriver",
+    "Stackdriver Logging",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Logging",
+]
 
 [tool.poetry.dependencies]
 python = "^3.5"
