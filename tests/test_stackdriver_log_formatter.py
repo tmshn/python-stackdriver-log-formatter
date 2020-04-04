@@ -69,8 +69,7 @@ def test_info(logger_and_data: LoggerAndData) -> None:
 
 def test_info_with_custom_data(logger_and_data: LoggerAndData) -> None:
     logger, data = logger_and_data
-    logger.info('I have a data: %(value)d',
-                {'value': 99, 'module': 'You cannot override!', 'stackInfo': 'Cannot override too'})
+    logger.info('I have a data: %(value)d', {'value': 99, 'module': 'cannot override', 'stackInfo': 'cannot override'})
     assert len(data) == 1
 
     # Make sure it is single line
@@ -83,7 +82,7 @@ def test_info_with_custom_data(logger_and_data: LoggerAndData) -> None:
     assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
     assert payload['module'] == 'test_stackdriver_log_formatter'  # This is not overriden
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
-    assert payload['logging.googleapis.com/sourceLocation']['line'] == 73
+    assert payload['logging.googleapis.com/sourceLocation']['line'] == 72
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_info_with_custom_data'
     assert payload['process']['name'] == 'MainProcess'
     assert isinstance(payload['process']['id'], int)
@@ -114,7 +113,7 @@ def test_exception(logger_and_data: LoggerAndData) -> None:
     assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
     assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
-    assert payload['logging.googleapis.com/sourceLocation']['line'] == 104
+    assert payload['logging.googleapis.com/sourceLocation']['line'] == 103
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_exception'
     assert payload['process']['name'] == 'MainProcess'
     assert isinstance(payload['process']['id'], int)
@@ -141,7 +140,7 @@ def test_custom_exception(logger_and_data: LoggerAndData) -> None:
     assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
     assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
-    assert payload['logging.googleapis.com/sourceLocation']['line'] == 131
+    assert payload['logging.googleapis.com/sourceLocation']['line'] == 130
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_custom_exception'
     assert payload['process']['name'] == 'MainProcess'
     assert isinstance(payload['process']['id'], int)
@@ -167,7 +166,7 @@ def test_stackinfo(logger_and_data: LoggerAndData) -> None:
     assert payload['logger'] == 'test_logger_for_stackdriver_log_formatter'
     assert payload['module'] == 'test_stackdriver_log_formatter'
     assert payload['logging.googleapis.com/sourceLocation']['file'] == __file__
-    assert payload['logging.googleapis.com/sourceLocation']['line'] == 157
+    assert payload['logging.googleapis.com/sourceLocation']['line'] == 156
     assert payload['logging.googleapis.com/sourceLocation']['function'] == 'test_stackinfo'
     assert payload['process']['name'] == 'MainProcess'
     assert isinstance(payload['process']['id'], int)

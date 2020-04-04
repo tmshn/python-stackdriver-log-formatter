@@ -22,7 +22,8 @@ jobs:
       python: 3.6
     - <<: *test
       python: 3.7
-      dist: bionic
+    - <<: *test
+      python: 3.8
     - stage: publish
       before_deploy:
         - pip install poetry
