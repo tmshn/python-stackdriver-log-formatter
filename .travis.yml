@@ -4,7 +4,7 @@ stages:
   - name: test
     if: type = pull_request OR branch = master
   - name: publish
-    if: branch = master AND tag IS present
+    if: tag IS present
 
 jobs:
   include:
@@ -25,8 +25,11 @@ jobs:
     - <<: *test
       python: 3.8
     - stage: publish
+      script: skip
       before_deploy:
         - pip install poetry
       deploy:
         provider: script
         script: poetry publish --build -u __token__ -p $PYPI_TOKEN
+        on:
+          tags: true
