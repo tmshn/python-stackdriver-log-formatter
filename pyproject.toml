@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stackdriver-log-formatter"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python log formatter for Google Stackdriver Logging"
 authors = ["Shinichi TAMURA <hello@tmshn.dev>"]
 license = "MIT"
