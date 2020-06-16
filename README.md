@@ -1,6 +1,6 @@
 # python-stackdriver-log-formatter
 
-[![Build Status](https://travis-ci.com/tmshn/python-stackdriver-log-formatter.svg?branch=master)](https://travis-ci.com/tmshn/python-stackdriver-log-formatter)
+[![Build Status](https://travis-ci.com/tmshn/python-stackdriver-log-formatter.svg?branch=v0)](https://travis-ci.com/tmshn/python-stackdriver-log-formatter)
 
 [![PyPI version](https://img.shields.io/pypi/v/stackdriver-log-formatter.svg)](https://pypi.python.org/pypi/stackdriver-log-formatter/)
 
