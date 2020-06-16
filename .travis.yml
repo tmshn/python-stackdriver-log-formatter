@@ -2,7 +2,7 @@ language: python
 
 stages:
   - name: test
-    if: type = pull_request OR branch = master
+    if: type = pull_request OR branch = v0
   - name: publish
     if: tag IS present
 
